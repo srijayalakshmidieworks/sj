@@ -532,5 +532,263 @@
     }));
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <!-- Sri Jayalakshmi Die Works - Enquiry Popup -->
+<style>
+#sj-enquiry-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+#sj-enquiry-box {
+  background: #fffdf8;
+  color: #30251b;
+  width: 100%;
+  max-width: 480px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 26px;
+  border-radius: 14px;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+}
+
+#sj-enquiry-box h2 {
+  margin: 0 30px 10px 0;
+  font-size: 24px;
+  color: #8b641e;
+}
+
+#sj-enquiry-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+#sj-enquiry-close {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #554637;
+}
+
+#sj-enquiry-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 13px 0 6px;
+}
+
+#sj-enquiry-form input,
+#sj-enquiry-form select,
+#sj-enquiry-form textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #d8cbb7;
+  border-radius: 6px;
+  box-sizing: border-box;
+  background: white;
+  color: #30251b;
+  font-size: 14px;
+}
+
+#sj-enquiry-form textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+#sj-enquiry-submit {
+  width: 100%;
+  padding: 13px;
+  margin-top: 19px;
+  border: none;
+  border-radius: 6px;
+  background: #8b641e;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#sj-enquiry-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#sj-enquiry-status {
+  margin-top: 12px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+#sj-enquiry-box .sj-enquiry-note {
+  font-size: 12px;
+  color: #6a6258;
+  margin: 12px 0 0;
+}
+
+@media (max-width: 480px) {
+  #sj-enquiry-box {
+    padding: 21px;
+  }
+
+  #sj-enquiry-box h2 {
+    font-size: 21px;
+  }
+}
+</style>
+
+<div id="sj-enquiry-overlay" role="dialog"
+     aria-modal="true" aria-labelledby="sj-enquiry-title">
+  <div id="sj-enquiry-box">
+    <button type="button" id="sj-enquiry-close"
+            aria-label="Close enquiry form">&times;</button>
+
+    <h2 id="sj-enquiry-title">Tell Us What You're Looking For</h2>
+
+    <p>
+      Looking for customised gold coins or jewellery?
+      Share your requirements and our team will get in touch with you.
+    </p>
+
+    <form id="sj-enquiry-form">
+      <label for="sj-name">Your Name *</label>
+      <input id="sj-name" name="name" type="text"
+             autocomplete="name" required>
+
+      <label for="sj-email">Email Address *</label>
+      <input id="sj-email" name="email" type="email"
+             autocomplete="email" required>
+
+      <label for="sj-whatsapp">WhatsApp Number *</label>
+      <input id="sj-whatsapp" name="whatsapp" type="tel"
+             autocomplete="tel" required>
+
+      <label for="sj-product">What Are You Looking For? *</label>
+      <select id="sj-product" name="product" required>
+        <option value="">Select your requirement</option>
+        <option>Customised Gold Coins</option>
+        <option>Traditional Gold Coins</option>
+        <option>Gold Coin Haram</option>
+        <option>Gold Gift Coins</option>
+        <option>Bulk Gold Coin Orders</option>
+        <option>Customised 2D Embossing Coin Dies</option>
+        <option>Customised 3D Embossing Coin Dies</option>
+        <option>Other Requirements</option>
+      </select>
+
+      <label for="sj-quantity">Approximate Quantity *</label>
+      <input id="sj-quantity" name="quantity" type="text"
+             placeholder="e.g. 100 coins or 50 pieces" required>
+
+      <label for="sj-requirements">Additional Requirements</label>
+      <textarea id="sj-requirements" name="requirements"
+                placeholder="Tell us about your design, size or other preferences"></textarea>
+
+      <button id="sj-enquiry-submit" type="submit">
+        Submit Enquiry
+      </button>
+
+      <div id="sj-enquiry-status" role="status"
+           aria-live="polite"></div>
+
+      <p class="sj-enquiry-note">
+        Your details will be used to respond to your enquiry.
+      </p>
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxxC2YtxOY8I5bYKtudceN1XjyErBFO5CNnOk5WA7NRrHbzx31Ter5TgL9U_xOcT9M1/exec";
+
+  const overlay = document.getElementById("sj-enquiry-overlay");
+  const form = document.getElementById("sj-enquiry-form");
+  const closeButton = document.getElementById("sj-enquiry-close");
+  const submitButton = document.getElementById("sj-enquiry-submit");
+  const status = document.getElementById("sj-enquiry-status");
+
+  function closePopup() {
+    overlay.style.display = "none";
+    try {
+      sessionStorage.setItem("sjEnquiryClosed", "yes");
+    } catch (error) {}
+  }
+
+  closeButton.addEventListener("click", closePopup);
+
+  overlay.addEventListener("click", function (event) {
+    if (event.target === overlay) closePopup();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay.style.display === "flex") {
+      closePopup();
+    }
+  });
+
+  window.addEventListener("load", function () {
+    let alreadyClosed = false;
+
+    try {
+      alreadyClosed =
+        sessionStorage.getItem("sjEnquiryClosed") === "yes";
+    } catch (error) {}
+
+    if (!alreadyClosed) {
+      setTimeout(function () {
+        overlay.style.display = "flex";
+      }, 7000);
+    }
+  });
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    status.textContent = "";
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(data)
+      });
+
+      status.textContent =
+        "Your request has been sent. Please contact us if you do not hear back.";
+
+      form.reset();
+
+    } catch (error) {
+      status.textContent =
+        "We could not confirm delivery. Please contact us directly by WhatsApp or email.";
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Submit Enquiry";
+    }
+  });
+})();
+</script>
 </body>
 </html>
