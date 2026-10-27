@@ -533,259 +533,226 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
   <!-- Sri Jayalakshmi Die Works - Enquiry Popup -->
-<style>
-#sj-enquiry-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  z-index: 99999;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  box-sizing: border-box;
-}
 
-#sj-enquiry-box {
-  background: #fffdf8;
-  color: #30251b;
-  width: 100%;
-  max-width: 480px;
-  max-height: 88vh;
-  overflow-y: auto;
-  padding: 26px;
-  border-radius: 14px;
-  box-sizing: border-box;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  font-family: Arial, sans-serif;
-}
-
-#sj-enquiry-box h2 {
-  margin: 0 30px 10px 0;
-  font-size: 24px;
-  color: #8b641e;
-}
-
-#sj-enquiry-box p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
-
-#sj-enquiry-close {
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  border: none;
-  background: transparent;
-  font-size: 28px;
-  cursor: pointer;
-  color: #554637;
-}
-
-#sj-enquiry-form label {
-  display: block;
-  font-size: 13px;
-  font-weight: bold;
-  margin: 13px 0 6px;
-}
-
-#sj-enquiry-form input,
-#sj-enquiry-form select,
-#sj-enquiry-form textarea {
-  width: 100%;
-  padding: 11px;
-  border: 1px solid #d8cbb7;
-  border-radius: 6px;
-  box-sizing: border-box;
-  background: white;
-  color: #30251b;
-  font-size: 14px;
-}
-
-#sj-enquiry-form textarea {
-  min-height: 85px;
-  resize: vertical;
-}
-
-#sj-enquiry-submit {
-  width: 100%;
-  padding: 13px;
-  margin-top: 19px;
-  border: none;
-  border-radius: 6px;
-  background: #8b641e;
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-#sj-enquiry-submit:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-#sj-enquiry-status {
-  margin-top: 12px;
-  font-size: 13px;
-  overflow-wrap: anywhere;
-}
-
-#sj-enquiry-box .sj-enquiry-note {
-  font-size: 12px;
-  color: #6a6258;
-  margin: 12px 0 0;
-}
-
-@media (max-width: 480px) {
-  #sj-enquiry-box {
-    padding: 21px;
-  }
-
-  #sj-enquiry-box h2 {
-    font-size: 21px;
-  }
-}
-</style>
-
-<div id="sj-enquiry-overlay" role="dialog"
-     aria-modal="true" aria-labelledby="sj-enquiry-title">
+<div id="sj-enquiry-overlay" style="display:none">
   <div id="sj-enquiry-box">
     <button type="button" id="sj-enquiry-close"
-            aria-label="Close enquiry form">&times;</button>
+      aria-label="Close">&times;</button>
 
-    <h2 id="sj-enquiry-title">Tell Us What You're Looking For</h2>
-
-    <p>
-      Looking for customised gold coins or jewellery?
-      Share your requirements and our team will get in touch with you.
-    </p>
+    <h2>How can we help you?</h2>
+    <p>Tell us about your requirement. Our team will be happy to assist you.</p>
 
     <form id="sj-enquiry-form">
-      <label for="sj-name">Your Name *</label>
+      <input type="hidden" name="access_key"
+        value="YOUR_WEB3FORMS_ACCESS_KEY">
+
+      <input type="hidden" name="subject"
+        value="New Enquiry - Sri Jayalakshmi Die Works">
+
+      <label for="sj-name">Your name *</label>
       <input id="sj-name" name="name" type="text"
-             autocomplete="name" required>
+        placeholder="Enter your full name" required>
 
-      <label for="sj-email">Email Address *</label>
+      <label for="sj-email">Email address *</label>
       <input id="sj-email" name="email" type="email"
-             autocomplete="email" required>
+        placeholder="you@example.com" required>
 
-      <label for="sj-whatsapp">WhatsApp Number *</label>
+      <label for="sj-whatsapp">WhatsApp number *</label>
       <input id="sj-whatsapp" name="whatsapp" type="tel"
-             autocomplete="tel" required>
+        placeholder="Your contact number" required>
 
-      <label for="sj-product">What Are You Looking For? *</label>
+      <label for="sj-product">Your requirement *</label>
       <select id="sj-product" name="product" required>
-        <option value="">Select your requirement</option>
+        <option value="">Choose a product or service</option>
+        <option>Gold Coins</option>
+        <option>Kasumalai</option>
         <option>Customised Gold Coins</option>
-        <option>Traditional Gold Coins</option>
-        <option>Gold Coin Haram</option>
-        <option>Gold Gift Coins</option>
-        <option>Bulk Gold Coin Orders</option>
-        <option>Customised 2D Embossing Coin Dies</option>
-        <option>Customised 3D Embossing Coin Dies</option>
+        <option>Coin Dies</option>
+        <option>Bulk Orders</option>
         <option>Other Requirements</option>
       </select>
 
-      <label for="sj-quantity">Approximate Quantity *</label>
-      <input id="sj-quantity" name="quantity" type="text"
-             placeholder="e.g. 100 coins or 50 pieces" required>
+      <label for="sj-quantity">Approximate quantity</label>
+      <input id="sj-quantity" name="quantity"
+        placeholder="e.g. 100 coins (optional)">
 
-      <label for="sj-requirements">Additional Requirements</label>
+      <label for="sj-requirements">Additional details</label>
       <textarea id="sj-requirements" name="requirements"
-                placeholder="Tell us about your design, size or other preferences"></textarea>
+        placeholder="Any special requirements? (optional)"></textarea>
 
-      <button id="sj-enquiry-submit" type="submit">
-        Submit Enquiry
+      <button type="submit" id="sj-enquiry-submit">
+        Submit Enquiry →
       </button>
 
-      <div id="sj-enquiry-status" role="status"
-           aria-live="polite"></div>
-
-      <p class="sj-enquiry-note">
-        Your details will be used to respond to your enquiry.
-      </p>
+      <p id="sj-enquiry-status" role="status"></p>
     </form>
+
+    <div id="sj-enquiry-success" style="display:none">
+      <div class="sj-coin">SJ</div>
+      <div class="sj-tick">✓</div>
+      <h2>Thank you! ✨</h2>
+      <p>Your enquiry has been received. Our team will get in touch with you soon.</p>
+    </div>
   </div>
 </div>
 
+<style>
+#sj-enquiry-overlay {
+  position:fixed; inset:0; z-index:99999;
+  background:rgba(25,10,8,.65);
+  align-items:center; justify-content:center; padding:16px;
+}
+#sj-enquiry-box {
+  position:relative; width:100%; max-width:440px;
+  max-height:90vh; overflow-y:auto; box-sizing:border-box;
+  padding:26px; border-radius:16px;
+  background:#fffdf8; color:#30251b;
+  font-family:Arial,sans-serif;
+  box-shadow:0 20px 60px #0003;
+  animation:sjIn .3s ease-out;
+}
+@keyframes sjIn {
+  from {opacity:0; transform:translateY(12px)}
+  to {opacity:1; transform:translateY(0)}
+}
+#sj-enquiry-close {
+  position:absolute; top:10px; right:12px;
+  border:0; background:#f5eee2; color:#5b0918;
+  border-radius:50%; width:34px; height:34px;
+  font-size:24px; cursor:pointer;
+}
+#sj-enquiry-box h2 {
+  color:#5b0918; font-family:Georgia,serif;
+  font-size:25px; margin:20px 0 10px;
+}
+#sj-enquiry-box p {
+  color:#6d625a; font-size:14px; line-height:1.6;
+}
+#sj-enquiry-form label {
+  display:block; margin:13px 0 6px;
+  font-size:13px; font-weight:600;
+}
+#sj-enquiry-form input,
+#sj-enquiry-form select,
+#sj-enquiry-form textarea {
+  width:100%; box-sizing:border-box; padding:12px;
+  border:1px solid #e5d9c6; border-radius:8px;
+  background:white; font-size:14px;
+}
+#sj-enquiry-form textarea { min-height:65px; resize:vertical; }
+#sj-enquiry-submit {
+  width:100%; margin-top:18px; padding:14px;
+  border:0; border-radius:8px;
+  background:#5b0918; color:white;
+  font-weight:bold; font-size:15px; cursor:pointer;
+}
+#sj-enquiry-submit:disabled { opacity:.6; }
+#sj-enquiry-status { color:#a52222; }
+#sj-enquiry-success { text-align:center; padding:20px 0; }
+.sj-coin {
+  margin:20px auto 10px; width:72px; height:72px;
+  display:grid; place-items:center; border-radius:50%;
+  border:4px solid #c58a2b;
+  background:linear-gradient(135deg,#fff0a9,#e0ad39,#fff0a9);
+  color:#5b0918; font:bold 28px Georgia,serif;
+  animation:sjFlip .9s ease-out;
+}
+@keyframes sjFlip {
+  from {transform:rotateY(0) scale(.3); opacity:0}
+  to {transform:rotateY(720deg) scale(1); opacity:1}
+}
+.sj-tick { color:#218b52; font-size:30px; }
+@media(max-width:480px) {
+  #sj-enquiry-box { padding:21px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #sj-enquiry-box,.sj-coin { animation:none; }
+}
+</style>
+
 <script>
 (function () {
-  const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbxxC2YtxOY8I5bYKtudceN1XjyErBFO5CNnOk5WA7NRrHbzx31Ter5TgL9U_xOcT9M1/exec";
-
   const overlay = document.getElementById("sj-enquiry-overlay");
+  const close = document.getElementById("sj-enquiry-close");
   const form = document.getElementById("sj-enquiry-form");
-  const closeButton = document.getElementById("sj-enquiry-close");
-  const submitButton = document.getElementById("sj-enquiry-submit");
+  const submit = document.getElementById("sj-enquiry-submit");
   const status = document.getElementById("sj-enquiry-status");
+  const success = document.getElementById("sj-enquiry-success");
+  const formArea = form.parentElement;
+  let sending = false;
 
   function closePopup() {
     overlay.style.display = "none";
-    try {
-      sessionStorage.setItem("sjEnquiryClosed", "yes");
-    } catch (error) {}
   }
 
-  closeButton.addEventListener("click", closePopup);
+  close.addEventListener("click", closePopup);
 
   overlay.addEventListener("click", function (event) {
-    if (event.target === overlay) closePopup();
+    if (event.target === overlay && !sending) closePopup();
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && overlay.style.display === "flex") {
-      closePopup();
-    }
+    if (event.key === "Escape" && !sending) closePopup();
   });
 
   window.addEventListener("load", function () {
-    let alreadyClosed = false;
-
-    try {
-      alreadyClosed =
-        sessionStorage.getItem("sjEnquiryClosed") === "yes";
-    } catch (error) {}
-
-    if (!alreadyClosed) {
-      setTimeout(function () {
-        overlay.style.display = "flex";
-      }, 7000);
-    }
-  });
+    setTimeout(function () {
+      overlay.style.display = "flex";
+    }, 7000);
+  }, { once: true });
 
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
+    if (sending) return;
 
+    if (form.elements.access_key.value ===
+        "da7fc726-60ac-456e-9a34-0ad23e1a88ec") {
+      status.textContent = "Please add your Web3Forms access key first.";
+      return;
+    }
+
+    sending = true;
+    submit.disabled = true;
+    submit.textContent = "Sending...";
     status.textContent = "";
-    submitButton.disabled = true;
-    submitButton.textContent = "Sending...";
 
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = new FormData(form);
+    data.set("replyto", form.elements.email.value);
 
     try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(data)
-      });
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: data
+        }
+      );
 
-      status.textContent =
-        "Your request has been sent. Please contact us if you do not hear back.";
+      const result = await response.json();
+      if (!response.ok || result.success !== true) {
+        throw new Error("Submission was not confirmed");
+      }
 
-      form.reset();
+      formArea.style.display = "none";
+      success.style.display = "block";
+
+      setTimeout(function () {
+        closePopup();
+        form.reset();
+        formArea.style.display = "block";
+        success.style.display = "none";
+        submit.disabled = false;
+        submit.textContent = "Submit Enquiry →";
+        sending = false;
+      }, 2800);
 
     } catch (error) {
       status.textContent =
-        "We could not confirm delivery. Please contact us directly by WhatsApp or email.";
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = "Submit Enquiry";
+        "Unable to send. Please try again or contact us on WhatsApp.";
+      submit.disabled = false;
+      submit.textContent = "Submit Enquiry →";
+      sending = false;
     }
   });
 })();
