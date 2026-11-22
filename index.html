@@ -198,17 +198,16 @@
       .footer-bottom { flex-direction: column; gap: 7px; }
       .floating-whatsapp { right: 12px; bottom: 12px; padding: 12px 15px; }
     }
-    
-/* THE PRECIOUS COLLECTIONS */
+    /* ELEGANT PRECIOUS COLLECTIONS */
 .collections {
-  padding: 75px 20px;
+  padding: 75px 0;
   background: #fffaf2;
-  overflow: hidden;
 }
 
 .collections .section-heading {
   text-align: center;
-  margin-bottom: 35px;
+  margin: 0 auto 42px;
+  max-width: 700px;
 }
 
 .collections .section-heading .eyebrow {
@@ -229,108 +228,101 @@
   font-size: 16px;
 }
 
-.collection-slider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  max-width: 1200px;
-  margin: auto;
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 38px 24px;
 }
 
-.collection-track {
-  display: flex;
-  gap: 22px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  padding: 15px 5px 25px;
-  flex: 1;
-  scrollbar-width: thin;
-  scrollbar-color: #b58a45 #eee2d2;
-}
-
-.collection-track::-webkit-scrollbar {
-  height: 7px;
-}
-
-.collection-track::-webkit-scrollbar-thumb {
-  background: #b58a45;
-  border-radius: 10px;
-}
-
-.collection-card {
-  flex: 0 0 250px;
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(75, 35, 25, 0.10);
-  scroll-snap-align: start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.collection-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 14px 30px rgba(75, 35, 25, 0.18);
-}
-
-.collection-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-}
-
-.collection-card h3 {
-  color: #641d29;
-  font-size: 17px;
+.collection-item {
   text-align: center;
-  padding: 18px 12px;
+  min-width: 0;
+}
+
+.collection-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 230px;
+  margin: 0 auto 17px;
+  padding: 7px;
+  border: 1px solid #d5b36c;
+  border-radius: 50%;
+  position: relative;
+  background: #fff;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.collection-image::before {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background: #c58a2b;
+  border: 3px solid #fffaf2;
+  border-radius: 50%;
+  top: 8px;
+  right: 25px;
+  z-index: 2;
+}
+
+.collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.collection-item:hover .collection-image {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(75, 35, 25, .13);
+}
+
+.collection-item h3 {
+  color: #641d29;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.35;
   margin: 0;
 }
 
-.collection-arrow {
-  flex: 0 0 42px;
-  width: 42px;
-  height: 42px;
-  border: none;
-  border-radius: 50%;
-  background: #741f30;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.collection-arrow:hover {
-  background: #a67c36;
+@media (max-width: 900px) {
+  .collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px 18px;
+  }
 }
 
 @media (max-width: 600px) {
   .collections {
-    padding: 50px 12px;
+    padding: 55px 0;
   }
 
-  .collection-slider {
-    gap: 6px;
+  .collections .section-heading {
+    margin-bottom: 30px;
   }
 
-  .collection-card {
-    flex-basis: 220px;
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 14px;
   }
 
-  .collection-card img {
-    height: 190px;
+  .collection-image {
+    max-width: 165px;
+    padding: 5px;
+    margin-bottom: 12px;
   }
 
-  .collection-arrow {
-    flex-basis: 32px;
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+  .collection-image::before {
+    width: 11px;
+    height: 11px;
+    right: 17px;
+    top: 6px;
+  }
+
+  .collection-item h3 {
+    font-size: 15px;
   }
 }
-
-
 </style>
   <script type="application/ld+json">
   {
@@ -513,59 +505,75 @@
     
 <section id="collections" class="collections">
   <div class="container">
+
     <div class="section-heading">
       <span class="eyebrow">CRAFTED WITH PRECISION</span>
       <h2>The Precious Collections</h2>
       <p>Discover our beautiful range of customised gold and silver creations.</p>
     </div>
 
-    <div class="collection-slider">
-      <button class="collection-arrow prev" type="button"
-        onclick="this.nextElementSibling.scrollBy({left:-280,behavior:'smooth'})"
-        aria-label="Previous collections">❮</button>
+    <div class="collection-grid">
 
-      <div class="collection-track">
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600" alt="Traditional gold coins">
-          <h3>Traditional Gold Coins</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600" alt="Gold gift coins">
-          <h3>Gold Gift Coins</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600" alt="Kasumalai jewellery">
-          <h3>Kasumalai</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" alt="Customised gold coins">
-          <h3>Customised Gold Coins</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Gold jewellery">
-          <h3>Gold Jewellery</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600" alt="Silver jewellery">
-          <h3>Silver Jewellery</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600" alt="Customised silver jewellery">
-          <h3>Customised Silver Jewellery</h3>
-        </article>
-        <article class="collection-card">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" alt="Silver coins">
-          <h3>Silver Coins</h3>
-        </article>
-      </div>
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600" alt="Traditional gold coins" loading="lazy">
+        </div>
+        <h3>Traditional Gold Coins</h3>
+      </article>
 
-      <button class="collection-arrow next" type="button"
-        onclick="this.previousElementSibling.scrollBy({left:280,behavior:'smooth'})"
-        aria-label="Next collections">❯</button>
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600" alt="Gold gift coins" loading="lazy">
+        </div>
+        <h3>Gold Gift Coins</h3>
+      </article>
+
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Kasumalai jewellery" loading="lazy">
+        </div>
+        <h3>Kasumalai</h3>
+      </article>
+
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" alt="Customised gold coins" loading="lazy">
+        </div>
+        <h3>Customised Gold Coins</h3>
+      </article>
+
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Gold jewellery" loading="lazy">
+        </div>
+        <h3>Gold Jewellery</h3>
+      </article>
+
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600" alt="Silver jewellery" loading="lazy">
+        </div>
+        <h3>Silver Jewellery</h3>
+      </article>
+
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600" alt="Customised silver jewellery" loading="lazy">
+        </div>
+        <h3>Customised Silver Jewellery</h3>
+      </article>
+
+      <article class="collection-item">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" alt="Silver coins" loading="lazy">
+        </div>
+        <h3>Silver Coins</h3>
+      </article>
+
     </div>
   </div>
 </section>
-
+    
     <section class="services" id="services">
       <div class="container services-layout">
         <div class="services-copy">
